@@ -11,8 +11,8 @@ namespace eShopSolution.Data.Migrations
                 name: "AppConfigs",
                 columns: table => new
                 {
-                    Key = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: false)
+                    Key = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -23,12 +23,12 @@ namespace eShopSolution.Data.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SortOrder = table.Column<int>(nullable: false),
-                    IsShowOnHome = table.Column<bool>(nullable: false),
-                    ParentId = table.Column<int>(nullable: true),
-                    Status = table.Column<int>(nullable: false, defaultValue: 1)
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    IsShowOnHome = table.Column<bool>(type: "bit", nullable: false),
+                    ParentId = table.Column<int>(type: "int", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false, defaultValue: 1)
                 },
                 constraints: table =>
                 {
@@ -39,13 +39,13 @@ namespace eShopSolution.Data.Migrations
                 name: "Contacts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 200, nullable: false),
-                    Email = table.Column<string>(maxLength: 200, nullable: false),
-                    PhoneNumber = table.Column<string>(maxLength: 200, nullable: false),
-                    Message = table.Column<string>(nullable: false),
-                    Status = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,9 +56,9 @@ namespace eShopSolution.Data.Migrations
                 name: "Languages",
                 columns: table => new
                 {
-                    Id = table.Column<string>(unicode: false, maxLength: 5, nullable: false),
-                    Name = table.Column<string>(maxLength: 20, nullable: false),
-                    IsDefault = table.Column<bool>(nullable: false)
+                    Id = table.Column<string>(type: "varchar(5)", unicode: false, maxLength: 5, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    IsDefault = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,15 +69,15 @@ namespace eShopSolution.Data.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderDate = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 1, 29, 21, 20, 57, 232, DateTimeKind.Local).AddTicks(9768)),
-                    UserId = table.Column<Guid>(nullable: false),
-                    ShipName = table.Column<string>(maxLength: 200, nullable: false),
-                    ShipAddress = table.Column<string>(maxLength: 200, nullable: false),
-                    ShipEmail = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
-                    ShipPhoneNumber = table.Column<string>(maxLength: 200, nullable: false),
-                    Status = table.Column<int>(nullable: false)
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 8, 25, 23, 12, 43, 723, DateTimeKind.Local).AddTicks(1039)),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ShipName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    ShipAddress = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    ShipEmail = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
+                    ShipPhoneNumber = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,14 +88,13 @@ namespace eShopSolution.Data.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<decimal>(nullable: false),
-                    OriginalPrice = table.Column<decimal>(nullable: false),
-                    Stock = table.Column<int>(nullable: false, defaultValue: 0),
-                    ViewCount = table.Column<int>(nullable: false, defaultValue: 0),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    SeoAlias = table.Column<string>(nullable: true)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    OriginalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    ViewCount = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -106,17 +105,17 @@ namespace eShopSolution.Data.Migrations
                 name: "Promotions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FromDate = table.Column<DateTime>(nullable: false),
-                    ToDate = table.Column<DateTime>(nullable: false),
-                    ApplyForAll = table.Column<bool>(nullable: false),
-                    DiscountPercent = table.Column<int>(nullable: true),
-                    DiscountAmount = table.Column<decimal>(nullable: true),
-                    ProductIds = table.Column<string>(nullable: true),
-                    ProductCategoryIds = table.Column<string>(nullable: true),
-                    Status = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: false)
+                    FromDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ToDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ApplyForAll = table.Column<bool>(type: "bit", nullable: false),
+                    DiscountPercent = table.Column<int>(type: "int", nullable: true),
+                    DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    ProductIds = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductCategoryIds = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -127,16 +126,16 @@ namespace eShopSolution.Data.Migrations
                 name: "Transactions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TransactionDate = table.Column<DateTime>(nullable: false),
-                    ExternalTransactionId = table.Column<string>(nullable: true),
-                    Amount = table.Column<decimal>(nullable: false),
-                    Fee = table.Column<decimal>(nullable: false),
-                    Result = table.Column<string>(nullable: true),
-                    Message = table.Column<string>(nullable: true),
-                    Status = table.Column<int>(nullable: false),
-                    Provider = table.Column<string>(nullable: true)
+                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExternalTransactionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Fee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Result = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    Provider = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -147,14 +146,14 @@ namespace eShopSolution.Data.Migrations
                 name: "CategoryTranslations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(maxLength: 200, nullable: false),
-                    SeoDescription = table.Column<string>(maxLength: 500, nullable: true),
-                    SeoTitle = table.Column<string>(maxLength: 200, nullable: true),
-                    LanguageId = table.Column<string>(unicode: false, maxLength: 5, nullable: false),
-                    SeoAlias = table.Column<string>(maxLength: 200, nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    SeoDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    SeoTitle = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    LanguageId = table.Column<string>(type: "varchar(5)", unicode: false, maxLength: 5, nullable: false),
+                    SeoAlias = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -177,13 +176,13 @@ namespace eShopSolution.Data.Migrations
                 name: "Carts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -200,10 +199,10 @@ namespace eShopSolution.Data.Migrations
                 name: "OrderDetails",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(nullable: false),
-                    ProductId = table.Column<int>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false)
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -226,8 +225,8 @@ namespace eShopSolution.Data.Migrations
                 name: "ProductInCategories",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -250,16 +249,16 @@ namespace eShopSolution.Data.Migrations
                 name: "ProductTranslations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(maxLength: 200, nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    Details = table.Column<string>(maxLength: 500, nullable: true),
-                    SeoDescription = table.Column<string>(nullable: true),
-                    SeoTitle = table.Column<string>(nullable: true),
-                    SeoAlias = table.Column<string>(maxLength: 200, nullable: false),
-                    LanguageId = table.Column<string>(unicode: false, maxLength: 5, nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Details = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    SeoDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SeoTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SeoAlias = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    LanguageId = table.Column<string>(type: "varchar(5)", unicode: false, maxLength: 5, nullable: false)
                 },
                 constraints: table =>
                 {

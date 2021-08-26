@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eShopSolution.Data.EF;
 
 namespace eShopSolution.Data.Migrations
 {
     [DbContext(typeof(EShopDbContext))]
-    partial class EShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210825161244_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,23 +33,6 @@ namespace eShopSolution.Data.Migrations
                     b.HasKey("Key");
 
                     b.ToTable("AppConfigs");
-
-                    b.HasData(
-                        new
-                        {
-                            Key = "HomeTitle",
-                            Value = "This is the home page of eShopSolution"
-                        },
-                        new
-                        {
-                            Key = "HomeKeyword",
-                            Value = "This is the keyword of eShopSolution"
-                        },
-                        new
-                        {
-                            Key = "HomeDescription",
-                            Value = "This is the description of eShopSolution"
-                        });
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.Cart", b =>
@@ -107,22 +92,6 @@ namespace eShopSolution.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsShowOnHome = true,
-                            SortOrder = 1,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsShowOnHome = true,
-                            SortOrder = 2,
-                            Status = 1
-                        });
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.CategoryTranslation", b =>
@@ -168,48 +137,6 @@ namespace eShopSolution.Data.Migrations
                     b.HasIndex("LanguageId");
 
                     b.ToTable("CategoryTranslations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            LanguageId = "vi-VN",
-                            Name = "Cà phê đặc sản",
-                            SeoAlias = "ca-phe-dac-san",
-                            SeoDescription = "Cà phê Arabica trên 80 điểm SCA",
-                            SeoTitle = "Cà phê Arabica trên 80 điểm SCA"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 1,
-                            LanguageId = "en-US",
-                            Name = "Specialty Coffee",
-                            SeoAlias = "specialty-coffee",
-                            SeoDescription = "Arabica coffee with SCA score above 80 points",
-                            SeoTitle = "Arabica coffee with SCA score above 80 points"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 2,
-                            LanguageId = "vi-VN",
-                            Name = "Cà phê thương mại",
-                            SeoAlias = "ca-phe-thuong-mai",
-                            SeoDescription = "Cà phê Arabica dưới 80 điểm SCA",
-                            SeoTitle = "Cà phê Arabica dưới 80 điểm SCA"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 2,
-                            LanguageId = "en-US",
-                            Name = "Commercial Coffee",
-                            SeoAlias = "commercial-coffee",
-                            SeoDescription = "Arabica coffee with SCA score below 80 points",
-                            SeoTitle = "Arabica coffee with SCA score below 80 points"
-                        });
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.Contact", b =>
@@ -266,20 +193,6 @@ namespace eShopSolution.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "vi-VN",
-                            IsDefault = true,
-                            Name = "Tiếng Việt"
-                        },
-                        new
-                        {
-                            Id = "en-US",
-                            IsDefault = false,
-                            Name = "English"
-                        });
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.Order", b =>
@@ -294,7 +207,7 @@ namespace eShopSolution.Data.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 8, 25, 23, 13, 43, 414, DateTimeKind.Local).AddTicks(5617));
+                        .HasDefaultValue(new DateTime(2021, 8, 25, 23, 12, 43, 723, DateTimeKind.Local).AddTicks(1039));
 
                     b.Property<string>("ShipAddress")
                         .IsRequired()
@@ -380,17 +293,6 @@ namespace eShopSolution.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateCreated = new DateTime(2021, 8, 25, 23, 13, 43, 426, DateTimeKind.Local).AddTicks(2714),
-                            OriginalPrice = 300000m,
-                            Price = 400000m,
-                            Stock = 0,
-                            ViewCount = 0
-                        });
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.ProductInCategory", b =>
@@ -406,13 +308,6 @@ namespace eShopSolution.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductInCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            ProductId = 1
-                        });
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.ProductTranslation", b =>
@@ -463,32 +358,6 @@ namespace eShopSolution.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductTranslations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "",
-                            Details = "Mô tả sản phẩm",
-                            LanguageId = "vi-VN",
-                            Name = "Cà phê đặc sản",
-                            ProductId = 1,
-                            SeoAlias = "ca-phe-dac-san",
-                            SeoDescription = "Cà phê Arabica trên 80 điểm SCA",
-                            SeoTitle = "Cà phê Arabica trên 80 điểm SCA"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "",
-                            Details = "Product Description",
-                            LanguageId = "en-US",
-                            Name = "Specialty Coffee",
-                            ProductId = 1,
-                            SeoAlias = "specialty-coffee",
-                            SeoDescription = "Arabica coffee with SCA score above 80 points",
-                            SeoTitle = "Arabica coffee with SCA score above 80 points"
-                        });
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.Promotion", b =>

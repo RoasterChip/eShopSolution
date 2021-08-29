@@ -6,9 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace eShopSolution.Data.EF
-{
+{ 
     public class EShopDbContext : IdentityDbContext
     {
         public EShopDbContext(DbContextOptions options) : base(options)
@@ -31,6 +32,21 @@ namespace eShopSolution.Data.EF
             modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+
+            //IdentityDbContext Configuration
+            modelBuilder.Entity<IdentityUserClaim<string>>()
+                .ToTable("AppUserClaims");
+            modelBuilder.Entity<IdentityUserRole<string>>()
+                .ToTable("AppUserRoles")
+                .HasKey(x => new {x.UserId, x.RoleId });
+            modelBuilder.Entity<IdentityUserLogin<string>>()
+                .ToTable("AppUserLogins")
+                .HasKey(x => new { x.UserId });
+            modelBuilder.Entity<IdentityRoleClaim<string>>()
+                .ToTable("AppRoleClaims");
+            modelBuilder.Entity<IdentityUserToken<string>>()
+                .ToTable("AppUserTokens")
+                .HasKey(x => new { x.UserId }); ;
 
             // Data Seeding
             modelBuilder.Seed();

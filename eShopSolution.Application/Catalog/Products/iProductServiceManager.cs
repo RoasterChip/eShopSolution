@@ -21,8 +21,6 @@ namespace eShopSolution.Application.Catalog.Products
 
         Task AddViewCount(int ProductId);
 
-        Task<List<ProductViewModel>> GetAll();
-
         Task<PageViewModel<ProductViewModel>>
             GetAllPaging(GetProductPagingRequest request);
     }

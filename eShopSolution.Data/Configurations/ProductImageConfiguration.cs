@@ -7,22 +7,19 @@ using System.Text;
 
 namespace eShopSolution.Data.Configurations
 {
-    public class CartConfiguration : IEntityTypeConfiguration<Cart>
+    public class ProductImageConfiguration : IEntityTypeConfiguration<ProductImage>
     {
-        public void Configure(EntityTypeBuilder<Cart> builder)
+        public void Configure(EntityTypeBuilder<ProductImage> builder)
         {
-            builder.ToTable("Carts");
+            builder.ToTable("ProductImages");
             builder.HasKey(x => x.Id);
-
             builder.Property(x => x.Id).UseIdentityColumn();
+            builder.Property(x => x.ImageURL).HasMaxLength(200).IsRequired(true);
+            builder.Property(x => x.Caption).HasMaxLength(200).IsRequired(false);
 
             builder.HasOne(x => x.Product)
-                .WithMany(x => x.Carts)
+                .WithMany(x => x.ProductImages)
                 .HasForeignKey(x => x.ProductId);
-
-            builder.HasOne(x => x.AppUser)
-                .WithMany(x => x.Carts)
-                .HasForeignKey(x => x.UserId);
         }
     }
 }

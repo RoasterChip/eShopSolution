@@ -1,12 +1,13 @@
-﻿using eShopSolution.Application.Catalog.Products.DTOs;
-using eShopSolution.Application.DTOs;
-using eShopSolution.Data.EF;
+﻿using eShopSolution.Data.EF;
+using eShopSolution.ViewModels.Catalog.Products;
+using eShopSolution.ViewModels.Catalog.Products.Public;
+using eShopSolution.ViewModels.Common;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 namespace eShopSolution.Application.Catalog.Products
 {
@@ -18,7 +19,7 @@ namespace eShopSolution.Application.Catalog.Products
             _context = context;
         }
 
-        public async Task<PageViewModel<ProductViewModel>> GetAllByCategoryId(DTOs.Public.GetProductPagingRequest request)
+        public async Task<PageViewModel<ProductViewModel>> GetAllByCategoryId(GetProductPagingRequest request)
         {
             //1. Select
             var query = from p in _context.Products

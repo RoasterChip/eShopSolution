@@ -1,10 +1,9 @@
-﻿using eShopSolution.Application.Catalog.Products.DTOs.Public;
-using eShopSolution.Application.Catalog.Products.DTOs;
-using eShopSolution.Application.DTOs;
+﻿using eShopSolution.ViewModels.Catalog.Products;
+using eShopSolution.ViewModels.Catalog.Products.Public;
+using eShopSolution.ViewModels.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using GetProductPagingRequest = eShopSolution.Application.Catalog.Products.DTOs.Public.GetProductPagingRequest;
 using System.Threading.Tasks;
 
 namespace eShopSolution.Application.Catalog.Products
